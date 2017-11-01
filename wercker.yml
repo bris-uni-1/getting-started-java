@@ -29,3 +29,11 @@ build:
         name: gradle build
         code: |
           ./gradlew --full-stacktrace -q --project-cache-dir=$WERCKER_CACHE_DIR build
+          
+    - internal/docker-scratch-push:
+        username: $DOCKERHUB_USERNAME
+        password: $DOCKERHUB_PASSWORD
+        cmd: /hello-java
+        tag: $WERCKER_GIT_COMMIT
+        repository: brisuni1/hello-java
+        registry: https://registry.hub.docker.com
